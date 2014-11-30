@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5EE5A8EC-65F6-4BA2-9563-7B23ADBCDE64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>piHome.Logic</RootNamespace>
+    <AssemblyName>piHome.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementation\DateProvider.cs" />
+    <Compile Include="Implementation\OutputCircuitsManager.cs" />
+    <Compile Include="Implementation\InputCircuitsManager.cs" />
+    <Compile Include="Implementation\PinMapper.cs" />
+    <Compile Include="Interfaces\IDateProvider.cs" />
+    <Compile Include="Interfaces\IInputCircuitsManager.cs" />
+    <Compile Include="Interfaces\IOutputCircuitsManager.cs" />
+    <Compile Include="Interfaces\IPinMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\piHome.DataAccess\piHome.DataAccess.csproj">
+      <Project>{59EE3CE7-7B1C-4A44-8B08-32A9E289AD1A}</Project>
+      <Name>piHome.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\piHome.GpioWrapper\piHome.GpioWrapper.csproj">
+      <Project>{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}</Project>
+      <Name>piHome.GpioWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\piHome.Models\piHome.Models.csproj">
+      <Project>{CB4E8E4D-FF99-4F8F-A43A-43756E516F9D}</Project>
+      <Name>piHome.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\piHome.Utils\piHome.Utils.csproj">
+      <Project>{66071134-BF79-41DC-92D0-5A404DF6E48D}</Project>
+      <Name>piHome.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
