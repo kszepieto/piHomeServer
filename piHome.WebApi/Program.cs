@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
 using Ninject;
-using log4net.Config;
 using piHome.DataAccess.Implementation;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
@@ -25,8 +24,6 @@ namespace piHome.Host
 
         static void Main(string[] args)
         {
-            XmlConfigurator.Configure();
-
             var db = new SqlLiteDb(piHomeDb);
             db.InitializeDB();
             NinjectConfiguration.Configure(db);

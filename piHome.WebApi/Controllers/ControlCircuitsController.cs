@@ -28,7 +28,7 @@ namespace piHome.WebApi.Controllers
         [HttpGet]
         public List<CircuitState> GetCircuitStates()
         {
-            LogHelper.LogMessage("GetCircuitStates: {0}");
+            LogHelper.LogMessage("GetCircuitStates");
 
             return _outputCircuitsManager.GetOutputPinsInfo();
         }

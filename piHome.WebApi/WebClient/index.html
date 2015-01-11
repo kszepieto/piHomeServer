@@ -3,9 +3,49 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>PiHome</title>
+
+    <!-- Style sheets -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+    <!-- Library Scripts -->
+    <script src="js/libraries/jquery.js"></script>
+    <script src="js/libraries/angular.js"></script>
+    <script src="js/libraries/angular-resource.js"></script>
+    <script src="js/libraries/angular-ui-router.js"></script>
+    <script src="js/libraries/bootstrap.js"></script>
+
+    <!-- Application Script -->
+    <script src="js/app/app.js"></script>
+
+    <!-- Services -->
+    <script src="js/common/common.services.js"></script>
+    <script src="js/common/productResource.js"></script>
 </head>
-<body>
-    Test dupa
+<body ng-app="piHome">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" ui-sref="home">PiHome</a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="home">Home</a></li>
+                    <li><a ui-sref="circuitsControl">Circuits</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ui-view></div>
+    </div>
 </body>
 </html>
