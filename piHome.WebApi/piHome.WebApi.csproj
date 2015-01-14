@@ -116,6 +116,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="WebClient\testData\ControlCircuits.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\piHome.DataAccess\piHome.DataAccess.csproj">
@@ -155,12 +156,11 @@
     <Content Include="WebClient\js\app\circuits\circuitsListView.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebClient\js\app\welcomeView.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebClient\js\common\productResource.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="WebClient\js\app\circuits\circuitsListViewCtrl.js" />
+    <Content Include="WebClient\js\app\stats\statsView.html" />
+    <Content Include="WebClient\js\app\stats\statsViewCtrl.js" />
+    <Content Include="WebClient\js\common\circuitsResourceService.js" />
+    <Content Include="WebClient\js\common\stateService.js" />
     <Content Include="WebClient\js\libraries\angular-resource.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
