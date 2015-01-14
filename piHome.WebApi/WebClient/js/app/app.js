@@ -1,34 +1,41 @@
 (function () {
     "use strict";
     var app = angular.module("piHome",
-        ["common.services", "ui.router"]);
+        ["ngResource", "ui.router"]);
 
     app.config(["$stateProvider",
                 "$urlRouterProvider",
-                "rootScopeService",
-        function ($stateProvider, $urlRouterProvider, rootScopeService) {
-            $urlRouterProvider.otherwise("/");
+                "$rootScopeProvider",
+        function ($stateProvider, $urlRouterProvider, $rootScopeProvider) {
+            console.log('config run');
+
+            $urlRouterProvider.otherwise("/circuitsControl");
 
             $stateProvider
-                .state("home", {
-                    url: "/",
-                    templateUrl: "js/app/welcomeView.html",
-                    onEnter: function () { console.log("Home - Enter") },
-                    onExit: function () { console.log("Home - Leave") }
-                })
                 .state("circuitsControl", {
-                    url: "/circuitsList",
+                    url: "/circuitsControl",
                     templateUrl: "js/app/circuits/circuitsListView.html",
-                    //controller: "ProductListCtrl as vm"
-                    onEnter: function () { console.log("Hejka") }
-                });
-
-            //var $injector = angular.injector();
-            //var x1 = $injector.get('$rootScope');
-            //var x2 = $injector.get('rootScope');
-            //var x3 = $injector.get('$rootScopeProvider');
+                    controller: "CircuitsListViewCtrl as vm",
+                })
+                .state("stats", {
+                    url: "/stats",
+                    templateUrl: "js/app/stats/statsView.html",
+                    controller: "StatsViewCtrl as vm",
+                })
         } ]
     );
 
+    app.run(function ($rootScope) {
+        console.log('app run');
+
+        $rootScope.$on('$stateChangeSuccess',
+            function (event, toState, toParams, fromState, fromParams, error) {
+                if (toState.name == 'circuitsControl') {
+                    $rootScope.refreshCircuitsList = true;
+                } else {
+                    $rootScope.refreshCircuitsList = false;
+                }
+            });
+    });
 
 } ());

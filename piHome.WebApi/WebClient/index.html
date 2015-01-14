@@ -18,15 +18,16 @@
 
     <!-- Application Script -->
     <script src="js/app/app.js"></script>
+    <script src="js/app/circuits/circuitsListViewCtrl.js"></script>
+    <script src="js/app/stats/statsViewCtrl.js"></script>
 
     <!-- Services -->
-    <script src="js/common/common.services.js"></script>
-    <script src="js/common/productResource.js"></script>
+    <script src="js/common/circuitsResourceService.js"></script>
+    <script src="js/common/stateService.js"></script>
 </head>
 <body ng-app="piHome">
     <nav class="navbar navbar-inverse">
         <div class="container">
-            <a class="navbar-brand" ui-sref="home">PiHome</a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -37,8 +38,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="home">Home</a></li>
                     <li><a ui-sref="circuitsControl">Circuits</a></li>
+                    <li><a ui-sref="stats">Stats</a></li>
                 </ul>
             </div>
         </div>
@@ -47,5 +48,7 @@
     <div class="container">
         <div ui-view></div>
     </div>
+
+    <div ng-controller="StatsViewCtrl"></div>
 </body>
 </html>

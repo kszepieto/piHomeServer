@@ -158,9 +158,6 @@
     <Content Include="WebClient\js\app\welcomeView.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebClient\js\common\common.services.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="WebClient\js\common\productResource.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
