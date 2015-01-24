@@ -1,0 +1,8 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <button type="button" class="btn btn-default btn-block" 
+            ng-repeat="circuit in CircuitStates"
+            ng-class="{'btn-primary': circuit.State}"
+            ng-click="vm.ChangeCircuitState(circuit)">{{circuit.Name}}</span></button>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+[{"Circuit":0,"State":false, "Name":"Obwód 1"}
+,{"Circuit":1,"State":false, "Name":"Obwód 2"}
+,{"Circuit":2,"State":false, "Name":"Obwód 3"}
+,{"Circuit":3,"State":true, "Name":"Obwód 4"}
+,{"Circuit":4,"State":true, "Name":"Obwód 5"}
+,{"Circuit":5,"State":false, "Name":"Obwód 6"}
+,{"Circuit":6,"State":false, "Name":"Obwód 7"}
+,{"Circuit":7,"State":false, "Name":"Obwód 8"}
+,{"Circuit":8,"State":true, "Name":"Obwód 9"}
+,{"Circuit":9,"State":true, "Name":"Obwód 10"}]
