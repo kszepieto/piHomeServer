@@ -4,29 +4,33 @@
     angular
         .module("piHome")
         .controller("CircuitsListViewCtrl",
-                    ["$scope", "$rootScope", "$interval", "circuitsResourceService", "stateService", CircuitsListViewCtrl]);
+                    ["$scope", "$interval", "circuitsResourceService", CircuitsListViewCtrl]);
 
-    function CircuitsListViewCtrl($scope, $rootScope, $interval, circuitsResourceService, stateService) {
+    function CircuitsListViewCtrl($scope, $interval, circuitsResourceService) {
         console.log('CircuitsListViewCtrl controller created');
 
-        stateService.update(true);
-        //$scope.$watch('IsCheckBoxSelected', function (newValue, oldValue) {
-        //    console.log('value changed from: ' + oldValue + ' to: ' + newValue);
-        //    stateService.update({NewValue: newValue, OldValue: oldValue});
+        //var circuits = circuitsResourceService.getCircuitsRequest();
+        //circuits.then(function(data) {
+        //    $scope.CircuitStates = data;
+        //}, function() {
+        //    $scope.CircuitStates = undefined;
         //});
 
+
         var poolCircuitsPromise = $interval(function () {
-            $scope.CircuitStates = circuitsResourceService.getCircuitsState();
+            var circuits = circuitsResourceService.getCircuitsRequest();
+            circuits.then(function (data) {
+                $scope.CircuitStates = data;
+            }, function () {
+                $scope.CircuitStates = undefined;
+            });
         }, 1000);
 
-        $rootScope.$watch('refreshCircuitsList', function () {
-            if ($scope.refreshCircuitsList === false) {
+        $scope.$on('$destroy', function () {
+            if (angular.isDefined(poolCircuitsPromise)) {
                 $interval.cancel(poolCircuitsPromise);
+                poolCircuitsPromise = undefined;
             }
         });
-
-        $scope.ChangeCircuitState = function (circuit) {
-            alert(circuit.Circuit);
-        };
     }
-} ());
+}());

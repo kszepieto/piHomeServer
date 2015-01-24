@@ -3,18 +3,27 @@
 
     var piHomeModule = angular.module("piHome");
 
-    piHomeModule.factory("circuitsResourceService", ["$resource", circuitsResourceService]);
+    piHomeModule.factory("circuitsResourceService", ["$q", "$http", circuitsResourceService]);
 
-    function circuitsResourceService($resource) {
+    function circuitsResourceService($q, $http) {
         console.log('circuitsResourceService service created');
-        
-        //var resource = $resource('/testData/:id', {id: '@id'}, {"getCircuitsState": {method: "GET", isArray:true, params: {something: "foo"}}});
-        
-        var resource = $resource('/testData/ControlCircuits.json', {id: '@id'}, {"getCircuitsState": {method: "GET", isArray:true}});
-        return {
-            getCircuitsState: function() {
-                return resource.getCircuitsState(1);
-            }            
+
+        var getCircuitsRequest = function() {
+            var deferred = $q.defer();
+
+            $http.get('/testData/ControlCircuits.json')
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+                .error(function(reason) {
+                    deferred.reject(reason);
+                });
+
+            return deferred.promise;
         };
-    }
+
+        return {
+            getCircuitsRequest: getCircuitsRequest
+        };
+    };
 } ());

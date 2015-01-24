@@ -5,8 +5,7 @@
 
     app.config(["$stateProvider",
                 "$urlRouterProvider",
-                "$rootScopeProvider",
-        function ($stateProvider, $urlRouterProvider, $rootScopeProvider) {
+        function ($stateProvider, $urlRouterProvider) {
             console.log('config run');
 
             $urlRouterProvider.otherwise("/circuitsControl");
@@ -21,21 +20,7 @@
                     url: "/stats",
                     templateUrl: "js/app/stats/statsView.html",
                     controller: "StatsViewCtrl as vm",
-                })
+                });
         } ]
     );
-
-    app.run(function ($rootScope) {
-        console.log('app run');
-
-        $rootScope.$on('$stateChangeSuccess',
-            function (event, toState, toParams, fromState, fromParams, error) {
-                if (toState.name == 'circuitsControl') {
-                    $rootScope.refreshCircuitsList = true;
-                } else {
-                    $rootScope.refreshCircuitsList = false;
-                }
-            });
-    });
-
 } ());
