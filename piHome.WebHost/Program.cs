@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
 using Ninject;
 using piHome.DataAccess.Implementation;
@@ -10,10 +7,9 @@ using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
 using piHome.Utils;
-using piHome.WebApi;
-using piHome.WebApi.Infrastructure;
+using piHome.WebHost.Infrastructure;
 
-namespace piHome.Host
+namespace piHome.WebHost
 {
     class Program
     {

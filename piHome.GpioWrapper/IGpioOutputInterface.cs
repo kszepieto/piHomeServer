@@ -1,5 +1,4 @@
-﻿using System;
-using piHome.GpioWrapper.Enums;
+﻿using piHome.GpioWrapper.Enums;
 
 namespace piHome.GpioWrapper
 {

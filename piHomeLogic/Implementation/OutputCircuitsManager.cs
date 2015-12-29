@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using piHome.DataAccess.Interfaces;
 using piHome.GpioWrapper;
-using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
-using piHome.Models.Enums;
-using piHome.WebApi.Models;
+using piHome.Models;
 
 namespace piHome.Logic.Implementation
 {
@@ -29,12 +26,12 @@ namespace piHome.Logic.Implementation
 
         #endregion
         
-        public void SwitchCircuit(Circuit circuit, bool newState)
+        public void SwitchCircuit(CircuitStateChange change)
         {
-            var currentState = _circuitsRepository.GetCircuitState(circuit);
-            if (newState != currentState)
+            var currentState = _circuitsRepository.GetCircuitState(change.Circuit);
+            if (change.State != currentState)
             {
-                var outputPin = _pinMapper.MapCircuitToOutputPin(circuit);
+                var outputPin = _pinMapper.MapCircuitToOutputPin(change.Circuit);
                 _gpioOutputInterface.ChangeCircutState(outputPin);
             }
         }
@@ -42,7 +39,7 @@ namespace piHome.Logic.Implementation
         public List<CircuitState> GetOutputPinsInfo()
         {
             var circuits = _circuitsRepository.GetCircuitStates();
-            return circuits.Select(x => new CircuitState {Circuit = x.Circuit, State = x.State}).ToList();
+            return circuits.Select(x => new CircuitState {Circuit = x.Circuit, State = x.State, Name = x.Name}).ToList();
         }
     }
 }

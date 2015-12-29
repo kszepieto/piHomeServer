@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using piHome.DataAccess.Entities;
 using piHome.DataAccess.Implementation;
 using piHome.Models.Enums;
-using piHome.WebApi.Models;
 
 namespace piHome.DataAccess.Test
 {

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircuitStateChange.cs" />
     <Compile Include="Enums\Circuit.cs" />
     <Compile Include="CircuitState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

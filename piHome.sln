@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.GpioWrapper", "piHome.GpioWrapper\piHome.GpioWrapper.csproj", "{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.WebApi", "piHome.WebApi\piHome.WebApi.csproj", "{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.Logic", "piHomeLogic\piHome.Logic.csproj", "{5EE5A8EC-65F6-4BA2-9563-7B23ADBCDE64}"
 EndProject
@@ -26,6 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D1BF9C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.WebHost", "piHome.WebHost\piHome.WebHost.csproj", "{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.Events", "piHome.Hubs\piHome.Events.csproj", "{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,10 +40,6 @@ Global
 		{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5EE5A8EC-65F6-4BA2-9563-7B23ADBCDE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5EE5A8EC-65F6-4BA2-9563-7B23ADBCDE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EE5A8EC-65F6-4BA2-9563-7B23ADBCDE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -64,6 +64,14 @@ Global
 		{66071134-BF79-41DC-92D0-5A404DF6E48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66071134-BF79-41DC-92D0-5A404DF6E48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66071134-BF79-41DC-92D0-5A404DF6E48D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4B9182D-4543-483D-8AA4-D76BCE50B2EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

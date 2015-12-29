@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using piHome.Models.Enums;
 using SQLite;
-using piHome.Models.Enums;
 
-namespace piHome.WebApi.Models
+namespace piHome.DataAccess.Entities
 {
     public class CircuitStateEntity
     {
@@ -14,7 +9,9 @@ namespace piHome.WebApi.Models
         public int Id { get; set; }
         
         public Circuit Circuit { get; set; }
-        
+
+        public string Name { get; set; }
+
         public bool State { get; set; }
     }
 }

@@ -2,10 +2,9 @@
 
 namespace piHome.Models
 {
-    public class CircuitState
+    public class CircuitStateChange
     {
         public Circuit Circuit { get; set; }
         public bool State { get; set; }
-        public string Name { get; set; }
     }
 }

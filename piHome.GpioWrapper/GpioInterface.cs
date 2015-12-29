@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Raspberry.IO.GeneralPurpose;
 using piHome.GpioWrapper.Enums;
 using piHome.Utils;
+using Raspberry.IO.GeneralPurpose;
 
 namespace piHome.GpioWrapper
 {

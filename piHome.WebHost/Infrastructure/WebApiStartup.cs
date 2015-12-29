@@ -1,24 +1,33 @@
 ﻿using System.Web.Http;
-using Microsoft.Owin.StaticFiles;
+using System.Web.Http.Cors;
+using Microsoft.AspNet.SignalR;
+using Microsoft.Owin.Cors;
+using Newtonsoft.Json.Converters;
 using Owin;
 
-namespace piHome.WebApi.Infrastructure
+namespace piHome.WebHost.Infrastructure
 {
     public class WebApiStartup
     {
         public void Configuration(IAppBuilder appBuilder)
         {
             // Configure Web API for self-host. 
-            var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
+            var webApiConfig = new HttpConfiguration();
+            webApiConfig.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "piHost/{controller}"
+                routeTemplate: "piHost/{controller}/{action}"
             );
+            
+            webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            webApiConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
+            webApiConfig.DependencyResolver = new NinjectAPIDependencyResolver();
+            appBuilder.UseWebApi(webApiConfig);//TODO add error handling
 
-            config.DependencyResolver = new NinjectAPIDependencyResolver();
-
-            appBuilder.UseWebApi(config);//TODO add error handling
-            appBuilder.UseStaticFiles("/WebClient");
+            //signalr
+            var signalRConfig = new HubConfiguration { EnableDetailedErrors = false };
+            appBuilder
+                .UseCors(CorsOptions.AllowAll)
+                .MapSignalR(signalRConfig);
         }
     }
 }

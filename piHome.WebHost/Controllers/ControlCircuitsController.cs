@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using piHome.GpioWrapper;
 using piHome.Logic.Interfaces;
-using piHome.Models.Enums;
+using piHome.Models;
 using piHome.Utils;
-using piHome.WebApi.Models;
 
-namespace piHome.WebApi.Controllers
+namespace piHome.WebHost.Controllers
 {
     public class ControlCircuitsController : ApiController
     {
@@ -30,13 +24,15 @@ namespace piHome.WebApi.Controllers
         {
             LogHelper.LogMessage("GetCircuitStates");
 
-            return _outputCircuitsManager.GetOutputPinsInfo();
-        }
+            var circuits = _outputCircuitsManager.GetOutputPinsInfo();
 
+            return circuits;
+        }
+        
         [HttpPost]
-        public void Switch(Circuit circuit, bool state)
+        public void Switch(CircuitStateChange change)
         {
-            _outputCircuitsManager.SwitchCircuit(circuit, state);
+            _outputCircuitsManager.SwitchCircuit(change);
         }
     }
 }

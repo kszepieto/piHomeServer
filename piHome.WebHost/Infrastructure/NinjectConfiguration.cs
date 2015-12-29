@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ninject;
 using piHome.DataAccess.Implementation;
 using piHome.DataAccess.Interfaces;
+using piHome.Events;
 using piHome.GpioWrapper;
 using piHome.Logic.Implementation;
 using piHome.Logic.Interfaces;
 using piHome.Utils;
 
-namespace piHome.WebApi.Infrastructure
+namespace piHome.WebHost.Infrastructure
 {
     public class NinjectConfiguration
     {
@@ -36,6 +33,7 @@ namespace piHome.WebApi.Infrastructure
             _kernel.Bind<IDateProvider>().To<DateProvider>();
             _kernel.Bind<IInputCircuitsManager>().To<InputCircuitsManager>();
             _kernel.Bind<IOutputCircuitsManager>().To<OutputCircuitsManager>();
+            _kernel.Bind<IEventBroadcaster>().To<EventBroadcaster>();
 
             LogHelper.LogMessage("Kernel initialized");
         }

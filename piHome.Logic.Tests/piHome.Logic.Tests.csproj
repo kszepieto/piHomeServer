@@ -37,8 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\piHome.GpioWrapper\piHome.GpioWrapper.csproj">
       <Project>{4C44E424-5C7A-4858-B6E0-8D9F5DA672DA}</Project>
       <Name>piHome.GpioWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\piHome.Hubs\piHome.Events.csproj">
+      <Project>{c8f69405-d03c-48b9-9b77-9f1cc3a8fc4d}</Project>
+      <Name>piHome.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\piHome.Models\piHome.Models.csproj">
       <Project>{CB4E8E4D-FF99-4F8F-A43A-43756E516F9D}</Project>

@@ -1,9 +1,10 @@
 ﻿using System;
 using piHome.DataAccess.Entities;
 using piHome.DataAccess.Interfaces;
-using piHome.GpioWrapper;
+using piHome.Events;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
+using piHome.Models;
 using piHome.Utils;
 
 namespace piHome.Logic.Implementation
@@ -13,14 +14,17 @@ namespace piHome.Logic.Implementation
         private readonly ICircuitsRepository _circuitsRepository;
         private readonly IPinMapper _mapper;
         private readonly IDateProvider _dateProvider;
+        private readonly IEventBroadcaster _eventBroadcaster;
 
         public InputCircuitsManager(ICircuitsRepository circuitsRepository,
             IPinMapper mapper,
-            IDateProvider dateProvider)
+            IDateProvider dateProvider,
+            IEventBroadcaster eventBroadcaster)
         {
             _circuitsRepository = circuitsRepository;
             _mapper = mapper;
             _dateProvider = dateProvider;
+            _eventBroadcaster = eventBroadcaster;
         }
 
         public void HandleCircuitChange(bool state, InputPin inputPin)
@@ -47,6 +51,8 @@ namespace piHome.Logic.Implementation
                     _circuitsRepository.Update(turnedOnEntry);
                 }
             }
+
+            _eventBroadcaster.BroadcastCircuitStateChange(new CircuitStateChange { Circuit = circuit, State = state });
         }
     }
 }

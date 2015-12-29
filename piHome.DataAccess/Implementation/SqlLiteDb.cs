@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using SQLite;
 using piHome.DataAccess.Entities;
-using piHome.DataAccess.Interfaces;
 using piHome.Models.Enums;
 using piHome.Utils;
-using piHome.WebApi.Models;
+using SQLite;
 
 namespace piHome.DataAccess.Implementation
 {
@@ -47,7 +45,8 @@ namespace piHome.DataAccess.Implementation
                 connection.Insert(new CircuitStateEntity
                 {
                     Circuit = circuit,
-                    State = false
+                    State = false,
+                    Name = "Circuit " + circuit
                 });
             }
         }

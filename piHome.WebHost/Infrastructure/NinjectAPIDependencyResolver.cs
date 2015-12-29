@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http.Dependencies;
 using Ninject;
-using piHome.DataAccess.Implementation;
-using piHome.DataAccess.Interfaces;
-using piHome.GpioWrapper;
-using piHome.Logic.Implementation;
-using piHome.Logic.Interfaces;
 
-namespace piHome.WebApi.Infrastructure
+namespace piHome.WebHost.Infrastructure
 {
     public class NinjectAPIDependencyResolver : IDependencyResolver
     {

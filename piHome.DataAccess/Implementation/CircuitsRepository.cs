@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
 using piHome.DataAccess.Entities;
 using piHome.DataAccess.Interfaces;
 using piHome.Models.Enums;
-using piHome.WebApi.Models;
 
 namespace piHome.DataAccess.Implementation
 {
