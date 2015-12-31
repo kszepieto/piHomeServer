@@ -12,13 +12,13 @@ namespace piHome.GpioWrapper
         #region private
 
         private const int BlinkDurationMilis = 500;
-        private GpioConnection gpioConnection;
+        private readonly GpioConnection gpioConnection;
 
         #endregion
 
         public GpioInterface()
         {
-            LogHelper.LogMessage("GpioInterface initialization started: {0}", DateTime.Now);//TODO implement loging of messages
+            LogHelper.LogMessage("GpioInterface initialization started: {0}", DateTime.Now);
 
             gpioConnection = new GpioConnection(new List<PinConfiguration>
             {
@@ -155,35 +155,15 @@ namespace piHome.GpioWrapper
         #endregion
 
         #region IDisposable
-        //TODO looks like I don't need this
 
-        //private bool _disposed;
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (_disposed)
-        //    {
-        //        return;
-        //    }
-
-        //    if (disposing)
-        //    {
-        //        if (gpioConnection != null)
-        //        {
-        //            gpioConnection.Close();
-        //            gpioConnection = null;
-        //        }
-        //    }
-
-        //    _disposed = true;
-        //}
-
+        public void Dispose()
+        {
+            if (gpioConnection != null && gpioConnection.IsOpened)
+            {
+                gpioConnection.Close();
+            }
+        }
+        
         #endregion
     }
 }

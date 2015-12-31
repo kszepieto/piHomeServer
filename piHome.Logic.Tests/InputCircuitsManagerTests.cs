@@ -21,7 +21,7 @@ namespace piHome.Logic.Tests
             var circuitRepositoryMock = new Mock<ICircuitsRepository>();
 
             var insertDate = new DateTime(2014, 1, 1, 12, 1, 1);
-            var stateEnteredWhenOn = new CircuitHistoricalState
+            var stateEnteredWhenOn = new CircuitStateHistory
             {
                 Circuit = Circuit.C1,
                 TurnOnTime = insertDate
@@ -42,11 +42,11 @@ namespace piHome.Logic.Tests
                 dateProviderMock.Object, eventBroadcasterMock.Object);
 
             manager.HandleCircuitChange(true, InputPin.I1);
-            circuitRepositoryMock.Verify(r => r.Insert(It.Is<CircuitHistoricalState>(cs => cs.Circuit == Circuit.C1)), Times.Once);
+            circuitRepositoryMock.Verify(r => r.Insert(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1)), Times.Once);
 
             manager.HandleCircuitChange(false, InputPin.I1);
             circuitRepositoryMock.Verify(r => r.GetLastRowHistoricalState(stateEnteredWhenOn.Circuit), Times.Once);
-            circuitRepositoryMock.Verify(r => r.Update(It.Is<CircuitHistoricalState>(cs => cs.Circuit == Circuit.C1 && cs.TurnedOnLength == 3600)), Times.Once);
+            circuitRepositoryMock.Verify(r => r.Update(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1 && cs.TurnedOnLength == 3600)), Times.Once);
             eventBroadcasterMock.Verify(x => x.BroadcastCircuitStateChange(It.IsAny<CircuitStateChange>()), Times.Once);
         }
     }

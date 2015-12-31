@@ -30,5 +30,10 @@ namespace piHome.GpioWrapper
         }
  
         #endregion
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

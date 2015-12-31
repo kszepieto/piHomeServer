@@ -21,10 +21,14 @@ namespace piHome.WebHost.Infrastructure
             webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             webApiConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
             webApiConfig.DependencyResolver = new NinjectAPIDependencyResolver();
-            appBuilder.UseWebApi(webApiConfig);//TODO add error handling
+            appBuilder.UseWebApi(webApiConfig);
 
-            //signalr
-            var signalRConfig = new HubConfiguration { EnableDetailedErrors = false };
+            var enableDetailedErrors = false;
+#if DEBUG
+            enableDetailedErrors = true;
+#endif
+
+            var signalRConfig = new HubConfiguration { EnableDetailedErrors = enableDetailedErrors };
             appBuilder
                 .UseCors(CorsOptions.AllowAll)
                 .MapSignalR(signalRConfig);

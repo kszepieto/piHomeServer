@@ -4,10 +4,12 @@ using piHome.Models.Enums;
 
 namespace piHome.DataAccess.Interfaces
 {
-    public interface ICircuitsRepository : IBaseRepository
+    public interface ICircuitsRepository
     {
         bool GetCircuitState(Circuit circuit);
         List<CircuitStateEntity> GetCircuitStates();
-        CircuitHistoricalState GetLastRowHistoricalState(Circuit circuit);
+        CircuitStateHistory GetLastRowHistoricalState(Circuit circuit);
+        void Insert(CircuitStateHistory circuitStateHistory);
+        void Update(CircuitStateHistory circuitStateHistory);
     }
 }

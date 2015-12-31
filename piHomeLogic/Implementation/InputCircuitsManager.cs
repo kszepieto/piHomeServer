@@ -35,7 +35,7 @@ namespace piHome.Logic.Implementation
             if (state)
             {
                 //when circuit is turned on
-                var newRow = new CircuitHistoricalState { Circuit = circuit, TurnOnTime = _dateProvider.GetDate(), TurnedOnLength = 0 };
+                var newRow = new CircuitStateHistory { Circuit = circuit, TurnOnTime = _dateProvider.GetDate(), TurnedOnLength = 0 };
                 _circuitsRepository.Insert(newRow);
             }
             else

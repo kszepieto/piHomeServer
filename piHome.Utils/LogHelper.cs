@@ -5,7 +5,7 @@ namespace piHome.Utils
     public static class LogHelper
     {
         //private static readonly ILog loggerError = LogManager.GetLogger("ERROR_LOGGER");
-        //private static readonly ILog loggerInfo = LogManager.GetLogger("INFO_LOGGER");//TODO BBB
+        //private static readonly ILog loggerInfo = LogManager.GetLogger("INFO_LOGGER");
 
         //public static void LogError(Exception ex)
         //{

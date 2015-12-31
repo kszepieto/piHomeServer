@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Driver;
 using piHome.DataAccess.Entities;
 using piHome.DataAccess.Interfaces;
 using piHome.Models.Enums;
@@ -8,28 +9,37 @@ namespace piHome.DataAccess.Implementation
 {
     public class CircuitsRepository : BaseRepository, ICircuitsRepository
     {
-        public CircuitsRepository(SqlLiteDb db) 
-            : base(db)
-        {
-        }
-
         public bool GetCircuitState(Circuit circuit)
         {
-            var circuits = _db.Connection.Query<CircuitStateEntity>("select * from CircuitStateEntity where Circuit = ?", circuit);
-            return circuits.Single().State;
+            return _dbContext.CircuitsState.Find(c => c.Circuit == circuit).Single().State;
         }
 
         public List<CircuitStateEntity> GetCircuitStates()
         {
-            return _db.Connection.Query<CircuitStateEntity>("select * from CircuitStateEntity");
+            return _dbContext.CircuitsState.Find(c => true).SortBy(c => c.Name).ToList();
         }
 
-        public CircuitHistoricalState GetLastRowHistoricalState(Circuit circuit)
+        public CircuitStateHistory GetLastRowHistoricalState(Circuit circuit)
         {
-            var query = "select * from CircuitHistoricalState where Circuit = ? AND TurnedOnLength = 0 order by TurnOnTime desc limit 1";
-            var circuits = _db.Connection.Query<CircuitHistoricalState>(query, circuit);
+            var circuits = _dbContext.CircuitsStateHistory.Find(c => c.Circuit == circuit && c.TurnedOnLength == 0)
+                .SortByDescending(c => c.TurnOnTime).Limit(1).ToList();
 
             return circuits.SingleOrDefault();
+        }
+
+        public void Insert(CircuitStateHistory circuitStateHistory)
+        {
+            _dbContext.CircuitsStateHistory.InsertOne(circuitStateHistory);
+        }
+
+        public void Update(CircuitStateHistory circuitStateHistory)
+        {
+            _dbContext.CircuitsStateHistory.FindOneAndReplace(c => c.Id == circuitStateHistory.Id, circuitStateHistory);
+        }
+
+        public CircuitsRepository(IDbContext dbContext)
+            : base(dbContext)
+        {
         }
     }
 }

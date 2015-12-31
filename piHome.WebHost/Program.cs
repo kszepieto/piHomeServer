@@ -13,16 +13,20 @@ namespace piHome.WebHost
 {
     class Program
     {
+        //resoources
+        //vnc - https://www.raspberrypi.org/documentation/remote-access/vnc/
+        //installing mongodb - http://www.widriksson.com/install-mongodb-raspberrypi/
+        //
+
+        //TODO 1 - authentication and authorization - inlcuidng Hubs
+        //TODO 2 - exception ahndling
+        //TODO 3 - add proper loging -> log4net doesn't work on PI
+
         const string baseAddress = "http://+:8081/";
-        private const string piHomeDb = "piHome.db";
-
-        //TODO BBB catch exceptions from pins monitor and logging
-
+        
         static void Main(string[] args)
         {
-            var db = new SqlLiteDb(piHomeDb);
-            db.InitializeDB();
-            NinjectConfiguration.Configure(db);
+            NinjectConfiguration.Configure();
 
             var inputGpio = NinjectConfiguration.GetInstance().Kernel.Get<IGpioInputInterface>();
             var inputManager = NinjectConfiguration.GetInstance().Kernel.Get<IInputCircuitsManager>();
