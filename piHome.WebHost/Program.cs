@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Owin.Hosting;
 using Ninject;
 using piHome.DataAccess.Implementation;
+using piHome.DataAccess.Infrastructure;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
@@ -16,17 +17,17 @@ namespace piHome.WebHost
         //resoources
         //vnc - https://www.raspberrypi.org/documentation/remote-access/vnc/
         //installing mongodb - http://www.widriksson.com/install-mongodb-raspberrypi/
-        //
 
         //TODO 1 - authentication and authorization - inlcuidng Hubs
-        //TODO 2 - exception ahndling
-        //TODO 3 - add proper loging -> log4net doesn't work on PI
+        //TODO 2 - implement authentication on client
+        //TODO 2 - add proper loging -> log4net doesn't work on PI
 
         const string baseAddress = "http://+:8081/";
         
         static void Main(string[] args)
         {
             NinjectConfiguration.Configure();
+            MongoMappingConventions.RegisterConventions();
 
             var inputGpio = NinjectConfiguration.GetInstance().Kernel.Get<IGpioInputInterface>();
             var inputManager = NinjectConfiguration.GetInstance().Kernel.Get<IInputCircuitsManager>();
@@ -54,7 +55,7 @@ namespace piHome.WebHost
 
                             if (pinParsedSucessfull && stateParsedSucessfull)
                             {
-                                inputGpio.InvokeCircuitStateChangedManually(state, inputPin);
+                                inputGpio.CircuitStateChanged(state, inputPin);
                             }
                         }
                     }

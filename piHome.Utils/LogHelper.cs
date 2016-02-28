@@ -11,12 +11,12 @@ namespace piHome.Utils
         //{
         //    loggerError.Error(string.Empty, ex);
         //}
-        
+
         //public static void LogErrorMessage(string errMsg)
         //{
         //    loggerError.Error(errMsg);
         //}
-
+        
         public static void LogMessage(string format, params object[] args)
         {
             var message = string.Format(format, args);

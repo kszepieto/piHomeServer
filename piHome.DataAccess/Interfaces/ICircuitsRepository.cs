@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using piHome.DataAccess.Entities;
+using piHome.Models;
 using piHome.Models.Enums;
 
 namespace piHome.DataAccess.Interfaces
@@ -9,7 +10,9 @@ namespace piHome.DataAccess.Interfaces
         bool GetCircuitState(Circuit circuit);
         List<CircuitStateEntity> GetCircuitStates();
         CircuitStateHistory GetLastRowHistoricalState(Circuit circuit);
-        void Insert(CircuitStateHistory circuitStateHistory);
-        void Update(CircuitStateHistory circuitStateHistory);
+
+        void InsertHistory(CircuitStateHistory circuitStateHistory);
+        void UpdateHistory(CircuitStateHistory circuitStateHistory);
+        void UpdateCircuitState(Circuit circuit, bool state);
     }
 }

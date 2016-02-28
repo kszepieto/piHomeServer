@@ -82,7 +82,7 @@ namespace piHome.GpioWrapper
             var pin = _outputPins.SingleOrDefault(ip => ip.Item1 == outputPin);
             if (pin == null)
             {
-                var errMsg = string.Format("Invalid value: {0}", outputPin);
+                var errMsg = $"Invalid value: {outputPin}";
                 throw new ArgumentOutOfRangeException(errMsg);
             }
 
@@ -92,12 +92,7 @@ namespace piHome.GpioWrapper
         #endregion
 
         #region IGpioInputInterface
-
-        public void InvokeCircuitStateChangedManually(bool state, InputPin inputPin)
-        {
-            throw new NotImplementedException("Invocation of this method is forbidden, added to interface for test purpose only");
-        }
-
+        
         public Action<bool, InputPin> CircuitStateChanged { get; set; }
 
         private readonly List<Tuple<InputPin, ConnectorPin>> _inputPins = new List<Tuple<InputPin, ConnectorPin>>

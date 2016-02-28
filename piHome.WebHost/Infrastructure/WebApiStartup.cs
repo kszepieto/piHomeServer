@@ -1,7 +1,11 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Configuration;
+using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.ExceptionHandling;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Owin;
 
@@ -11,23 +15,32 @@ namespace piHome.WebHost.Infrastructure
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            // Configure Web API for self-host. 
+            // webAPI
             var webApiConfig = new HttpConfiguration();
             webApiConfig.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "piHost/{controller}/{action}"
             );
-            
-            webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+
+            if (Type.GetType("Mono.Runtime") != null)
+            {
+                webApiConfig.MessageHandlers.Add(new MonoPatchingDelegatingHandler());
+            }
+
+            webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));//TODO
             webApiConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
             webApiConfig.DependencyResolver = new NinjectAPIDependencyResolver();
+            webApiConfig.Services.Add(typeof(IExceptionLogger), new PiHomeExceptionLogger());
+            webApiConfig.Services.Replace(typeof(IExceptionHandler), new PiHomeExceptionHandler());
+
             appBuilder.UseWebApi(webApiConfig);
 
-            var enableDetailedErrors = false;
-#if DEBUG
-            enableDetailedErrors = true;
-#endif
+            // signalR
 
+            var serializer = (JsonSerializer)GlobalHost.DependencyResolver.GetService(typeof(JsonSerializer));
+            serializer.Converters.Add(new StringEnumConverter());
+
+            var enableDetailedErrors = Boolean.Parse(ConfigurationManager.AppSettings["SignalREnableDetailedErrors"]);
             var signalRConfig = new HubConfiguration { EnableDetailedErrors = enableDetailedErrors };
             appBuilder
                 .UseCors(CorsOptions.AllowAll)

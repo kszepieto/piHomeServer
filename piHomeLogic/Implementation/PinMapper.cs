@@ -32,7 +32,7 @@ namespace piHome.Logic.Implementation
                 case Circuit.C10:
                     return OutputPin.O10;
                 default:
-                    throw new ArgumentOutOfRangeException("circuit");
+                    throw new ArgumentOutOfRangeException(nameof(circuit));
             }
         }
 
@@ -61,7 +61,7 @@ namespace piHome.Logic.Implementation
                 case InputPin.I10:
                     return Circuit.C10;
                 default:
-                    throw new ArgumentOutOfRangeException("inputPin");
+                    throw new ArgumentOutOfRangeException(nameof(inputPin));
             }
         }
     }

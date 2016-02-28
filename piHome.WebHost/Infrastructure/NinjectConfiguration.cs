@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Ninject;
 using piHome.DataAccess;
 using piHome.DataAccess.Implementation;
+using piHome.DataAccess.Infrastructure;
 using piHome.DataAccess.Interfaces;
 using piHome.Events;
 using piHome.GpioWrapper;
@@ -25,12 +26,12 @@ namespace piHome.WebHost.Infrastructure
         {
             _kernel = new StandardKernel();
 
-#if DEBUG
+//#if DEBUG
             var gpioInterface = new GpioFakeInterface();
-#else
-            var gpioInterface = new GpioInterface();
-#endif
-            
+//#else
+//            var gpioInterface = new GpioInterface();
+//#endif
+
             _kernel.Bind<IMongoDatabase>().ToConstant(GetDatabase());
             _kernel.Bind<IDbContext>().To<DbContext>();
             _kernel.Bind<ICircuitsRepository>().To<CircuitsRepository>();

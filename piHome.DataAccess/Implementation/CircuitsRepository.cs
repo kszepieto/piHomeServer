@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using piHome.DataAccess.Entities;
@@ -27,14 +28,19 @@ namespace piHome.DataAccess.Implementation
             return circuits.SingleOrDefault();
         }
 
-        public void Insert(CircuitStateHistory circuitStateHistory)
+        public void InsertHistory(CircuitStateHistory circuitStateHistory)
         {
             _dbContext.CircuitsStateHistory.InsertOne(circuitStateHistory);
         }
 
-        public void Update(CircuitStateHistory circuitStateHistory)
+        public void UpdateHistory(CircuitStateHistory circuitStateHistory)
         {
             _dbContext.CircuitsStateHistory.FindOneAndReplace(c => c.Id == circuitStateHistory.Id, circuitStateHistory);
+        }
+
+        public void UpdateCircuitState(Circuit circuit, bool state)
+        {
+            _dbContext.CircuitsState.UpdateOne(c => c.Circuit == circuit, Builders<CircuitStateEntity>.Update.Set(c => c.State, state));
         }
 
         public CircuitsRepository(IDbContext dbContext)

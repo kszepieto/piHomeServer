@@ -4,6 +4,6 @@ namespace piHome.Logic.Interfaces
 {
     public interface IDateProvider
     {
-        DateTime GetDate();
+        DateTime GetUtcDateTimeDate();
     }
 }

@@ -35,8 +35,8 @@ namespace piHome.Logic.Implementation
             if (state)
             {
                 //when circuit is turned on
-                var newRow = new CircuitStateHistory { Circuit = circuit, TurnOnTime = _dateProvider.GetDate(), TurnedOnLength = 0 };
-                _circuitsRepository.Insert(newRow);
+                var newRow = new CircuitStateHistory { Circuit = circuit, TurnOnTime = _dateProvider.GetUtcDateTimeDate(), TurnedOnLength = 0 };
+                _circuitsRepository.InsertHistory(newRow);
             }
             else
             {
@@ -44,14 +44,15 @@ namespace piHome.Logic.Implementation
 
                 if (turnedOnEntry != null)
                 {
-                    var now = _dateProvider.GetDate();
+                    var now = _dateProvider.GetUtcDateTimeDate();
                     var turnedOnTime = (int)Math.Round((now - turnedOnEntry.TurnOnTime).TotalSeconds);
 
                     turnedOnEntry.TurnedOnLength = turnedOnTime;
-                    _circuitsRepository.Update(turnedOnEntry);
+                    _circuitsRepository.UpdateHistory(turnedOnEntry);
                 }
             }
 
+            _circuitsRepository.UpdateCircuitState(circuit, state);
             _eventBroadcaster.BroadcastCircuitStateChange(new CircuitStateChange { Circuit = circuit, State = state });
         }
     }

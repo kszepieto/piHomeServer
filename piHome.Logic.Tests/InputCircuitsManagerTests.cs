@@ -27,13 +27,13 @@ namespace piHome.Logic.Tests
                 TurnOnTime = insertDate
             };
 
-            circuitRepositoryMock.Setup(r => r.Insert(stateEnteredWhenOn));
-            circuitRepositoryMock.Setup(r => r.Update(stateEnteredWhenOn));
+            circuitRepositoryMock.Setup(r => r.InsertHistory(stateEnteredWhenOn));
+            circuitRepositoryMock.Setup(r => r.UpdateHistory(stateEnteredWhenOn));
             circuitRepositoryMock.Setup(r => r.GetLastRowHistoricalState(stateEnteredWhenOn.Circuit))
                                  .Returns(() => stateEnteredWhenOn);
 
             var dateProviderMock = new Mock<IDateProvider>();
-            dateProviderMock.Setup(dp => dp.GetDate())
+            dateProviderMock.Setup(dp => dp.GetUtcDateTimeDate())
                             .Returns(() => insertDate)
                             .Callback(() => insertDate = insertDate.AddHours(1));
             var eventBroadcasterMock = new Mock<IEventBroadcaster>();
@@ -42,11 +42,11 @@ namespace piHome.Logic.Tests
                 dateProviderMock.Object, eventBroadcasterMock.Object);
 
             manager.HandleCircuitChange(true, InputPin.I1);
-            circuitRepositoryMock.Verify(r => r.Insert(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1)), Times.Once);
+            circuitRepositoryMock.Verify(r => r.InsertHistory(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1)), Times.Once);
 
             manager.HandleCircuitChange(false, InputPin.I1);
             circuitRepositoryMock.Verify(r => r.GetLastRowHistoricalState(stateEnteredWhenOn.Circuit), Times.Once);
-            circuitRepositoryMock.Verify(r => r.Update(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1 && cs.TurnedOnLength == 3600)), Times.Once);
+            circuitRepositoryMock.Verify(r => r.UpdateHistory(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1 && cs.TurnedOnLength == 3600)), Times.Once);
             eventBroadcasterMock.Verify(x => x.BroadcastCircuitStateChange(It.IsAny<CircuitStateChange>()), Times.Once);
         }
     }

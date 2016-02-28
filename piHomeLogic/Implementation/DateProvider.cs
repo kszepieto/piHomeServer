@@ -5,9 +5,9 @@ namespace piHome.Logic.Implementation
 {
     public class DateProvider : IDateProvider
     {
-        public DateTime GetDate()
+        public DateTime GetUtcDateTimeDate()
         {
-            return DateTime.Now;
+            return DateTime.UtcNow;
         }
     }
 }

@@ -12,12 +12,7 @@ namespace piHome.GpioWrapper
         }
 
         #region IGpioInputInterface
-
-        public void InvokeCircuitStateChangedManually(bool state, InputPin inputPin)
-        {
-            CircuitStateChanged(state, inputPin);
-        }
-
+        
         public Action<bool, InputPin> CircuitStateChanged { get; set; } 
         
         #endregion
