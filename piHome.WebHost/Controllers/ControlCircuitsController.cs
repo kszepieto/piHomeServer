@@ -7,15 +7,18 @@ using piHome.Logic.Interfaces;
 using piHome.Models.Circuit;
 using piHome.Models.Circuit.Enums;
 using piHome.Utils;
+using piHome.WebHost.Infrastructure;
 using piHome.WebHost.Infrastructure.DI;
 
 namespace piHome.WebHost.Controllers
 {
+    [RoutePrefix("api/Circuit")]
     public class ControlCircuitsController : ApiController
     {
         private readonly IOutputCircuitsManager _outputCircuitsManager;
         
         [HttpGet]
+        [Route("CircuitsState")]
         public List<CircuitState> GetCircuitStates()
         {
             LogHelper.LogMessage("GetCircuitStates");
@@ -26,6 +29,7 @@ namespace piHome.WebHost.Controllers
         }
 
         [HttpPost]
+        [Route("Switch")]
         public void Switch(CircuitStateChange change)
         {
 #if DEBUG

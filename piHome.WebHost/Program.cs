@@ -19,9 +19,8 @@ namespace piHome.WebHost
         //vnc - https://www.raspberrypi.org/documentation/remote-access/vnc/
         //installing mongodb - http://www.widriksson.com/install-mongodb-raspberrypi/
 
-        //TODO 1 - authentication and authorization - inlcuidng Hubs
-        //TODO 2 - implement authentication on client
-        //TODO 2 - add proper loging -> log4net doesn't work on PI
+        //TODO 2- implement authentication on client
+        //TODO 3 - add proper loging -> log4net doesn't work on PI
 
         const string baseAddress = "http://+:8081/";
         

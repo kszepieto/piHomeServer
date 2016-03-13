@@ -70,7 +70,6 @@
     <Compile Include="Implementation\AuthRepository.cs" />
     <Compile Include="Implementation\BaseRepository.cs" />
     <Compile Include="Implementation\CircuitsRepository.cs" />
-    <Compile Include="Infrastructure\ExpressionsHelper.cs" />
     <Compile Include="Interfaces\IAuthRepository.cs" />
     <Compile Include="DbInitializer.cs" />
     <Compile Include="Interfaces\ICircuitsRepository.cs" />

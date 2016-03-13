@@ -54,6 +54,8 @@ namespace piHome.WebHost.AuthProviders
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
+
+            context.OwinContext.Response.Headers.Remove("Access-Control-Allow-Origin");
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             var hashedTokenId = AuthHelper.GetHash(context.Token);

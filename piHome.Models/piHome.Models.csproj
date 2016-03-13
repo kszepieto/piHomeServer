@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth\BaseEntity.cs" />
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="Auth\Client.cs" />
     <Compile Include="Auth\RefreshToken.cs" />
     <Compile Include="Auth\User.cs" />

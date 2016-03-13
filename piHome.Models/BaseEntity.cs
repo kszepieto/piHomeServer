@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace piHome.Models.Auth
+namespace piHome.Models
 {
     public abstract class BaseEntity
     {

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
 using Microsoft.AspNet.SignalR;
@@ -14,6 +18,7 @@ using Owin;
 using piHome.WebHost.AuthProviders;
 using piHome.WebHost.Infrastructure.DI;
 using piHome.WebHost.Infrastructure.ExceptionHandling;
+using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace piHome.WebHost.Infrastructure
 {
@@ -21,45 +26,48 @@ namespace piHome.WebHost.Infrastructure
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureOAuth(app);
             ConfigureWebApi(app);
             ConfigureSignalR(app);
-            ConfigureOAuth(app);
         }
 
         private void ConfigureWebApi(IAppBuilder app)
         {
-            var webApiConfig = new HttpConfiguration();
-            webApiConfig.MapHttpAttributeRoutes();
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
 
-            webApiConfig.Routes.MapHttpRoute(
+            config.Filters.Add(new AuthorizeAttribute());
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "piHost/{controller}"
             );
 
             if (Type.GetType("Mono.Runtime") != null)
             {
-                webApiConfig.MessageHandlers.Add(new MonoPatchingDelegatingHandler());
+                config.MessageHandlers.Add(new MonoPatchingDelegatingHandler());
             }
 
-            webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));//TODO
-            webApiConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
-            webApiConfig.DependencyResolver = new NinjectAPIDependencyResolver();
-            webApiConfig.Services.Add(typeof(IExceptionLogger), new PiHomeExceptionLogger());
-            webApiConfig.Services.Replace(typeof(IExceptionHandler), new PiHomeExceptionHandler());
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));//TODO
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
+            config.DependencyResolver = new NinjectAPIDependencyResolver();
+            config.Services.Add(typeof(IExceptionLogger), new PiHomeExceptionLogger());
+            config.Services.Replace(typeof(IExceptionHandler), new PiHomeExceptionHandler());
 
-            app.UseWebApi(webApiConfig);
+            app.UseCors(CorsOptions.AllowAll);
+            app.UseWebApi(config);
         }
 
         private void ConfigureSignalR(IAppBuilder app)
         {
+            GlobalHost.HubPipeline.RequireAuthentication();
+
             var serializer = (JsonSerializer)GlobalHost.DependencyResolver.GetService(typeof(JsonSerializer));
             serializer.Converters.Add(new StringEnumConverter());
 
             var enableDetailedErrors = Boolean.Parse(ConfigurationManager.AppSettings["SignalREnableDetailedErrors"]);
             var signalRConfig = new HubConfiguration { EnableDetailedErrors = enableDetailedErrors };
-            app
-                .UseCors(CorsOptions.AllowAll)
-                .MapSignalR(signalRConfig);
+            app.MapSignalR(signalRConfig);
         }
 
         private void ConfigureOAuth(IAppBuilder app)
@@ -71,7 +79,7 @@ namespace piHome.WebHost.Infrastructure
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(20),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(20),
                 Provider = authorizationProvider,
                 RefreshTokenProvider = refreshTokenProvider
             };
@@ -79,7 +87,6 @@ namespace piHome.WebHost.Infrastructure
             // Token Generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
         }
     }
 }
