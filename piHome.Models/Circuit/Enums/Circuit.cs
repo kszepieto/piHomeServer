@@ -1,4 +1,4 @@
-﻿namespace piHome.Models.Enums
+﻿namespace piHome.Models.Circuit.Enums
 {
     public enum Circuit
     {

@@ -1,14 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using System.Web.Http.Results;
-using Newtonsoft.Json;
 
-namespace piHome.WebHost.Infrastructure
+namespace piHome.WebHost.Infrastructure.ExceptionHandling
 {
     public class PiHomeExceptionHandler : ExceptionHandler
     {

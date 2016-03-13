@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using piHome.DataAccess.Entities;
-using piHome.Models;
-using piHome.Models.Enums;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.DataAccess.Interfaces
 {

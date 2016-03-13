@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using Ninject;
 
-namespace piHome.WebHost.Infrastructure
+namespace piHome.WebHost.Infrastructure.DI
 {
     public class NinjectAPIDependencyResolver : IDependencyResolver
     {

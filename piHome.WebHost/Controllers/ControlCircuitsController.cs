@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using Ninject;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
-using piHome.Models;
-using piHome.Models.Enums;
+using piHome.Models.Circuit;
+using piHome.Models.Circuit.Enums;
 using piHome.Utils;
-using piHome.WebHost.Infrastructure;
+using piHome.WebHost.Infrastructure.DI;
 
 namespace piHome.WebHost.Controllers
 {
     public class ControlCircuitsController : ApiController
     {
         private readonly IOutputCircuitsManager _outputCircuitsManager;
-
-        #region C'stor
-
-        public ControlCircuitsController(IOutputCircuitsManager outputCircuitsManager)
-        {
-            _outputCircuitsManager = outputCircuitsManager;
-        }
-
-        #endregion
-
+        
         [HttpGet]
         public List<CircuitState> GetCircuitStates()
         {
@@ -39,9 +29,9 @@ namespace piHome.WebHost.Controllers
         public void Switch(CircuitStateChange change)
         {
 #if DEBUG
-            var inputGpio = NinjectConfiguration.GetInstance().Kernel.Get<IGpioInputInterface>();
+            var inputGpio = NinjectConfiguration.GetInstance().Kernel.Get<IGpioInputInterface>();//TODO
 
-            Dictionary<Circuit, InputPin> inputPins = new Dictionary<Circuit, InputPin>
+            var inputPins = new Dictionary<Circuit, InputPin>
             {
                 {Circuit.C1, InputPin.I1},
                 {Circuit.C2, InputPin.I2},
@@ -60,5 +50,14 @@ namespace piHome.WebHost.Controllers
 
             _outputCircuitsManager.SwitchCircuit(change);
         }
+
+        #region C'stor
+
+        public ControlCircuitsController(IOutputCircuitsManager outputCircuitsManager)
+        {
+            _outputCircuitsManager = outputCircuitsManager;
+        }
+
+        #endregion
     }
 }

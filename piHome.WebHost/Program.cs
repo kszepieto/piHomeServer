@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Owin.Hosting;
+using MongoDB.Driver;
 using Ninject;
-using piHome.DataAccess.Implementation;
-using piHome.DataAccess.Infrastructure;
+using piHome.DataAccess;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
 using piHome.Utils;
 using piHome.WebHost.Infrastructure;
+using piHome.WebHost.Infrastructure.DI;
 
 namespace piHome.WebHost
 {
@@ -27,10 +28,12 @@ namespace piHome.WebHost
         static void Main(string[] args)
         {
             NinjectConfiguration.Configure();
-            MongoMappingConventions.RegisterConventions();
 
-            var inputGpio = NinjectConfiguration.GetInstance().Kernel.Get<IGpioInputInterface>();
-            var inputManager = NinjectConfiguration.GetInstance().Kernel.Get<IInputCircuitsManager>();
+            var kernel = NinjectConfiguration.GetInstance().Kernel;
+            DbInitializer.Initialize(kernel.Get<IDbContext>()).Wait();
+
+            var inputGpio = kernel.Get<IGpioInputInterface>();
+            var inputManager = kernel.Get<IInputCircuitsManager>();
             inputGpio.CircuitStateChanged = inputManager.HandleCircuitChange;
             
             LogHelper.LogMessage("Input GPIO: " + baseAddress);

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using piHome.Models;
+using piHome.Models.Circuit;
 
 namespace piHome.Logic.Interfaces
 {

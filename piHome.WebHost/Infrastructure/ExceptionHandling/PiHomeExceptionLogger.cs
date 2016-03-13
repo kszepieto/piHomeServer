@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Web.Http.ExceptionHandling;
 using piHome.Utils;
 
-namespace piHome.WebHost.Infrastructure
+namespace piHome.WebHost.Infrastructure.ExceptionHandling
 {
     public class PiHomeExceptionLogger : ExceptionLogger
     {

@@ -1,7 +1,5 @@
 ﻿using System;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using piHome.Models.Enums;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.DataAccess.Entities
 {

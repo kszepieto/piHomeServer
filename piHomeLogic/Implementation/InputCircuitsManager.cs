@@ -4,7 +4,7 @@ using piHome.DataAccess.Interfaces;
 using piHome.Events;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Interfaces;
-using piHome.Models;
+using piHome.Models.Circuit;
 using piHome.Utils;
 
 namespace piHome.Logic.Implementation

@@ -4,8 +4,8 @@ using piHome.DataAccess.Interfaces;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Implementation;
-using piHome.Models;
-using piHome.Models.Enums;
+using piHome.Models.Circuit;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.Logic.Tests
 {

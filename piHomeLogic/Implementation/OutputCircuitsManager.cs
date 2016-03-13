@@ -3,7 +3,7 @@ using System.Linq;
 using piHome.DataAccess.Interfaces;
 using piHome.GpioWrapper;
 using piHome.Logic.Interfaces;
-using piHome.Models;
+using piHome.Models.Circuit;
 
 namespace piHome.Logic.Implementation
 {

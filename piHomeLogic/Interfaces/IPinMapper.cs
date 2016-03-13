@@ -1,5 +1,5 @@
 ﻿using piHome.GpioWrapper.Enums;
-using piHome.Models.Enums;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.Logic.Interfaces
 {

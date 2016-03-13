@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using piHome.DataAccess.Entities;
 using piHome.DataAccess.Interfaces;
-using piHome.Models.Enums;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.DataAccess.Implementation
 {

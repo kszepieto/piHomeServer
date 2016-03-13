@@ -7,8 +7,8 @@ using piHome.Events;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Implementation;
 using piHome.Logic.Interfaces;
-using piHome.Models;
-using piHome.Models.Enums;
+using piHome.Models.Circuit;
+using piHome.Models.Circuit.Enums;
 
 namespace piHome.Logic.Tests
 {

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\MongoDB.Bson.2.2.3\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,12 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitStateChange.cs" />
-    <Compile Include="Enums\Circuit.cs" />
-    <Compile Include="CircuitState.cs" />
-    <Compile Include="Enums\SettingKey.cs" />
+    <Compile Include="Auth\BaseEntity.cs" />
+    <Compile Include="Auth\Client.cs" />
+    <Compile Include="Auth\RefreshToken.cs" />
+    <Compile Include="Auth\User.cs" />
+    <Compile Include="Circuit\CircuitStateChange.cs" />
+    <Compile Include="Circuit\Enums\Circuit.cs" />
+    <Compile Include="Circuit\CircuitState.cs" />
+    <Compile Include="Circuit\Enums\SettingKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
