@@ -47,7 +47,7 @@ namespace piHome.Logic.Tests
             manager.HandleCircuitChange(false, InputPin.I1);
             circuitRepositoryMock.Verify(r => r.GetLastRowHistoricalState(stateEnteredWhenOn.Circuit), Times.Once);
             circuitRepositoryMock.Verify(r => r.UpdateHistory(It.Is<CircuitStateHistory>(cs => cs.Circuit == Circuit.C1 && cs.TurnedOnLength == 3600)), Times.Once);
-            eventBroadcasterMock.Verify(x => x.BroadcastCircuitStateChange(It.IsAny<CircuitStateChange>()), Times.Once);
+            eventBroadcasterMock.Verify(x => x.BroadcastCircuitStateChange(It.IsAny<StateChange>()), Times.Once);
         }
     }
 }

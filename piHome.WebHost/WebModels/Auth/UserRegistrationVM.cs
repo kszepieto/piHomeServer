@@ -2,7 +2,7 @@
 
 namespace piHome.WebHost.WebModels.Auth
 {
-    public class UserRegistrationWm
+    public class UserRegistrationVM
     {
         [Required]
         public string UserName { get; set; }

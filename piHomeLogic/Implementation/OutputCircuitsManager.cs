@@ -26,7 +26,7 @@ namespace piHome.Logic.Implementation
 
         #endregion
         
-        public void SwitchCircuit(CircuitStateChange change)
+        public void SwitchCircuit(StateChange change)
         {
             var currentState = _circuitsRepository.GetCircuitState(change.Circuit);
             if (change.State != currentState)

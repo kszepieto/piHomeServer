@@ -21,7 +21,7 @@ namespace piHome.Logic.Tests
             circuitRepositoryMock.Setup(r => r.GetCircuitState(It.IsAny<Circuit>())).Returns(true);
 
             var circuitManager = new OutputCircuitsManager(gpioOutputInterfaceMock.Object, circuitRepositoryMock.Object, new PinMapper());
-            circuitManager.SwitchCircuit(new CircuitStateChange {Circuit = Circuit.C1, State = true});
+            circuitManager.SwitchCircuit(new StateChange {Circuit = Circuit.C1, State = true});
 
             gpioOutputInterfaceMock.Verify(gpio => gpio.ChangeCircutState(OutputPin.O1), Times.Never);
         }
@@ -35,7 +35,7 @@ namespace piHome.Logic.Tests
             circuitRepositoryMock.Setup(r => r.GetCircuitState(It.IsAny<Circuit>())).Returns(true);
 
             var circuitManager = new OutputCircuitsManager(gpioOutputInterfaceMock.Object, circuitRepositoryMock.Object, new PinMapper());
-            circuitManager.SwitchCircuit(new CircuitStateChange { Circuit = Circuit.C1, State = false });
+            circuitManager.SwitchCircuit(new StateChange { Circuit = Circuit.C1, State = false });
 
             gpioOutputInterfaceMock.Verify(gpio => gpio.ChangeCircutState(OutputPin.O1), Times.Once);
         }

@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.WebHost", "piHome.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "piHome.Events", "piHome.Hubs\piHome.Events.csproj", "{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiHome.WebHost.Tests", "PiHome.WebHost.Tests\PiHome.WebHost.Tests.csproj", "{E083F676-50E4-4A55-A889-8F046427B6EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,11 +68,16 @@ Global
 		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8F69405-D03C-48B9-9B77-9F1CC3A8FC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E083F676-50E4-4A55-A889-8F046427B6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E083F676-50E4-4A55-A889-8F046427B6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E083F676-50E4-4A55-A889-8F046427B6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E083F676-50E4-4A55-A889-8F046427B6EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B7CDB041-944B-4A97-8BBB-5F5BF6C7C7F3} = {8AC2E5A0-8434-4386-8112-748B76429762}
+		{E083F676-50E4-4A55-A889-8F046427B6EF} = {8AC2E5A0-8434-4386-8112-748B76429762}
 	EndGlobalSection
 EndGlobal

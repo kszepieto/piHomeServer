@@ -5,7 +5,7 @@ namespace piHome.Logic.Interfaces
 {
     public interface IOutputCircuitsManager
     {
-        void SwitchCircuit(CircuitStateChange change);
+        void SwitchCircuit(StateChange change);
 
         List<CircuitState> GetOutputPinsInfo();
     }

@@ -4,7 +4,7 @@ using piHome.Utils;
 
 namespace piHome.WebHost.Infrastructure.ExceptionHandling
 {
-    public class PiHomeExceptionLogger : ExceptionLogger
+    public class GlobalExceptionLogger : ExceptionLogger
     {
         public override void Log(ExceptionLoggerContext context)
         {

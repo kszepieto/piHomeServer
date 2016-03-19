@@ -6,7 +6,7 @@ namespace piHome.Events
 {
     public class EventBroadcaster : IEventBroadcaster
     {
-        public void BroadcastCircuitStateChange(CircuitStateChange change)
+        public void BroadcastCircuitStateChange(StateChange change)
         {
             var clients = GlobalHost.ConnectionManager.GetHubContext<PiHomeHub>().Clients;
 

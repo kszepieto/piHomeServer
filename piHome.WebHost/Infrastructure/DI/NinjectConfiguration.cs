@@ -12,6 +12,7 @@ using piHome.Logic.Implementation;
 using piHome.Logic.Interfaces;
 using piHome.Models.Auth;
 using piHome.Utils;
+using piHome.WebHost.Infrastructure.Mapping;
 using piHome.WebHost.WebModels.Auth;
 
 namespace piHome.WebHost.Infrastructure.DI
@@ -38,7 +39,7 @@ namespace piHome.WebHost.Infrastructure.DI
 
             LogHelper.LogMessage("Kernel initialized");
         }
-        
+
         private void RegisterGPIOComponents(IKernel kernel)
         {
 #if DEBUG
@@ -64,21 +65,12 @@ namespace piHome.WebHost.Infrastructure.DI
             kernel.Bind<IAuthRepository>().To<AuthRepository>();
         }
 
-        private void RegisterAutoMapper(IKernel _kernel)
+        private void RegisterAutoMapper(IKernel kernel)
         {
-            var config = InitMappings();
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingsProfile>());
             config.AssertConfigurationIsValid();
 
-            _kernel.Bind<IMapper>().ToMethod((ctx) => config.CreateMapper());
-        }
-
-        private MapperConfiguration InitMappings()
-        {
-            return new MapperConfiguration(
-                cfg => cfg.CreateMap<UserRegistrationWm, User>()
-                        .ForSourceMember(sm => sm.ConfirmPassword, opt => opt.Ignore())
-                        .ForMember(dm => dm.Id, opt => opt.Ignore())
-                );
+            kernel.Bind<IMapper>().ToMethod((ctx) => config.CreateMapper());
         }
         
         private IMongoDatabase GetDatabase()
@@ -96,7 +88,7 @@ namespace piHome.WebHost.Infrastructure.DI
         {
             if (_instance == null)
             {
-                _instance = new NinjectConfiguration();    
+                _instance = new NinjectConfiguration();
             }
         }
 
@@ -109,7 +101,7 @@ namespace piHome.WebHost.Infrastructure.DI
 
             return _instance;
         }
- 
+
         #endregion
     }
 }

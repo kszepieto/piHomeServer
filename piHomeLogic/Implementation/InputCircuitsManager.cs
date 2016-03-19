@@ -53,7 +53,7 @@ namespace piHome.Logic.Implementation
             }
 
             _circuitsRepository.UpdateCircuitState(circuit, state);
-            _eventBroadcaster.BroadcastCircuitStateChange(new CircuitStateChange { Circuit = circuit, State = state });
+            _eventBroadcaster.BroadcastCircuitStateChange(new StateChange { Circuit = circuit, State = state });
         }
     }
 }

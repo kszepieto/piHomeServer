@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Controllers;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
 using Microsoft.AspNet.SignalR;
@@ -37,6 +33,7 @@ namespace piHome.WebHost.Infrastructure
             config.MapHttpAttributeRoutes();
 
             config.Filters.Add(new AuthorizeAttribute());
+            config.Filters.Add(new ValidateModelAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -51,8 +48,9 @@ namespace piHome.WebHost.Infrastructure
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));//TODO
             config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
             config.DependencyResolver = new NinjectAPIDependencyResolver();
-            config.Services.Add(typeof(IExceptionLogger), new PiHomeExceptionLogger());
-            config.Services.Replace(typeof(IExceptionHandler), new PiHomeExceptionHandler());
+
+            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
@@ -83,8 +81,7 @@ namespace piHome.WebHost.Infrastructure
                 Provider = authorizationProvider,
                 RefreshTokenProvider = refreshTokenProvider
             };
-
-            // Token Generation
+            
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }

@@ -4,6 +4,6 @@ namespace piHome.Events
 {
     public interface IEventBroadcaster
     {
-        void BroadcastCircuitStateChange(CircuitStateChange change);
+        void BroadcastCircuitStateChange(StateChange change);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
-using Microsoft.AspNet.Identity;
 using piHome.DataAccess.Interfaces;
 using piHome.Models.Auth;
+using piHome.WebHost.Infrastructure.Exceptions;
 using piHome.WebHost.WebModels.Auth;
 
 namespace piHome.WebHost.Controllers
@@ -14,55 +14,18 @@ namespace piHome.WebHost.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
 
-        //POST piHost/Account/Register
         [AllowAnonymous]
         [Route("Register")]
         [HttpPost]
-        public async Task<IHttpActionResult> Register(UserRegistrationWm userRegistrationWm)
+        public async Task<IHttpActionResult> Register(UserRegistrationVM userRegistrationVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await _authRepository.RegisterUser(_mapper.Map<User>(userRegistrationWm));
-            var errorResult = GetErrorResult(result);
-
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
-        }
-
-        private IHttpActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return InternalServerError();
-            }
-
+            var result = await _authRepository.RegisterUser(_mapper.Map<User>(userRegistrationVM));
             if (!result.Succeeded)
             {
-                if (result.Errors != null)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
+                throw new InvalidInputException("User registration error", result.Errors);
             }
-
-            return null;
+            
+            return Ok();
         }
 
         #region C'tor
