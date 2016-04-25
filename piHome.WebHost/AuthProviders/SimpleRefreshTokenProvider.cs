@@ -2,13 +2,13 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Infrastructure;
 using piHome.DataAccess.Interfaces;
-using piHome.Models.Auth;
+using piHome.Models.Entities.Auth;
 
 namespace piHome.WebHost.AuthProviders
 {
     public class SimpleRefreshTokenProvider : IAuthenticationTokenProvider
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IAuthDalHelper _authDalHelper;
 
         public void Create(AuthenticationTokenCreateContext context)
         {
@@ -28,7 +28,7 @@ namespace piHome.WebHost.AuthProviders
 
             var refreshTokenLifeTime = context.OwinContext.Get<string>("as:clientRefreshTokenLifeTime");
 
-            var token = new RefreshToken()
+            var token = new RefreshTokenEntity()
             {
                 RefreshTokenId = AuthHelper.GetHash(refreshTokenId),
                 ClientId = clientid,
@@ -42,7 +42,7 @@ namespace piHome.WebHost.AuthProviders
 
             token.ProtectedTicket = context.SerializeTicket();
 
-            await _authRepository.AddRefreshToken(token);
+            await _authDalHelper.AddRefreshToken(token);
             context.SetToken(refreshTokenId);
         }
 
@@ -60,19 +60,19 @@ namespace piHome.WebHost.AuthProviders
 
             var hashedTokenId = AuthHelper.GetHash(context.Token);
 
-            var refreshToken = await _authRepository.FindRefreshToken(hashedTokenId);
+            var refreshToken = await _authDalHelper.FindRefreshToken(hashedTokenId);
 
             if (refreshToken != null)
             {
                 //Get protectedTicket from refreshToken class
                 context.DeserializeTicket(refreshToken.ProtectedTicket);
-                await _authRepository.RemoveRefreshToken(hashedTokenId);
+                await _authDalHelper.RemoveRefreshToken(hashedTokenId);
             }
         }
 
-        public SimpleRefreshTokenProvider(IAuthRepository authRepository)
+        public SimpleRefreshTokenProvider(IAuthDalHelper authDalHelper)
         {
-            _authRepository = authRepository;
+            _authDalHelper = authDalHelper;
         }
     }
 }

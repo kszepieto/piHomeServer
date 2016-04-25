@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using piHome.DataAccess.Interfaces;
 using piHome.GpioWrapper;
 using piHome.Logic.Interfaces;
-using piHome.Models.Circuit;
+using piHome.Logic.Shared.Interfaces;
+using piHome.Models.Entities.Circuits;
+using piHome.Models.ValueObjects;
 
 namespace piHome.Logic.Implementation
 {
     public class OutputCircuitsManager : IOutputCircuitsManager
     {
         private readonly IGpioOutputInterface _gpioOutputInterface;
-        private readonly ICircuitsRepository _circuitsRepository;
+        private readonly ICircuitsDalHelper _circuitsDalHelper;
         private readonly IPinMapper _pinMapper;
 
         #region C'stor
 
         public OutputCircuitsManager(IGpioOutputInterface gpioOutputInterface, 
-            ICircuitsRepository circuitsRepository,
+            ICircuitsDalHelper circuitsDalHelper,
             IPinMapper pinMapper)
         {
             _gpioOutputInterface = gpioOutputInterface;
-            _circuitsRepository = circuitsRepository;
+            _circuitsDalHelper = circuitsDalHelper;
             _pinMapper = pinMapper;
         }
 
@@ -28,7 +29,7 @@ namespace piHome.Logic.Implementation
         
         public void SwitchCircuit(StateChange change)
         {
-            var currentState = _circuitsRepository.GetCircuitState(change.Circuit);
+            var currentState = _circuitsDalHelper.GetCircuitState(change.Circuit);
             if (change.State != currentState)
             {
                 var outputPin = _pinMapper.MapCircuitToOutputPin(change.Circuit);
@@ -36,10 +37,9 @@ namespace piHome.Logic.Implementation
             }
         }
 
-        public List<CircuitState> GetOutputPinsInfo()
+        public List<CircuitStateEntity> GetOutputPinsInfo()
         {
-            var circuits = _circuitsRepository.GetCircuitStates();
-            return circuits.Select(x => new CircuitState {Circuit = x.Circuit, State = x.State, Name = x.Name}).ToList();
+            return _circuitsDalHelper.GetCircuitStates();
         }
     }
 }

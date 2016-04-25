@@ -4,8 +4,9 @@ using piHome.DataAccess.Interfaces;
 using piHome.GpioWrapper;
 using piHome.GpioWrapper.Enums;
 using piHome.Logic.Implementation;
-using piHome.Models.Circuit;
-using piHome.Models.Circuit.Enums;
+using piHome.Logic.Shared.Implementation;
+using piHome.Models.Enums;
+using piHome.Models.ValueObjects;
 
 namespace piHome.Logic.Tests
 {
@@ -17,7 +18,7 @@ namespace piHome.Logic.Tests
         {
             var gpioOutputInterfaceMock = new Mock<IGpioOutputInterface>();
 
-            var circuitRepositoryMock = new Mock<ICircuitsRepository>();
+            var circuitRepositoryMock = new Mock<ICircuitsDalHelper>();
             circuitRepositoryMock.Setup(r => r.GetCircuitState(It.IsAny<Circuit>())).Returns(true);
 
             var circuitManager = new OutputCircuitsManager(gpioOutputInterfaceMock.Object, circuitRepositoryMock.Object, new PinMapper());
@@ -31,7 +32,7 @@ namespace piHome.Logic.Tests
         {
             var gpioOutputInterfaceMock = new Mock<IGpioOutputInterface>();
 
-            var circuitRepositoryMock = new Mock<ICircuitsRepository>();
+            var circuitRepositoryMock = new Mock<ICircuitsDalHelper>();
             circuitRepositoryMock.Setup(r => r.GetCircuitState(It.IsAny<Circuit>())).Returns(true);
 
             var circuitManager = new OutputCircuitsManager(gpioOutputInterfaceMock.Object, circuitRepositoryMock.Object, new PinMapper());

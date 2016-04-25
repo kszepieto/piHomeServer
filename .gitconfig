@@ -1,0 +1,14 @@
+[diff]
+tool = winmerge
+[difftool]
+prompt = true
+[difftool "winmerge"]
+path = C:\\Program Files (x86)\\WinMerge\\winmergeu.exe
+cmd = \"C:\\Program Files (x86)\\WinMerge\\winmergeu.exe\" \"$LOCAL\" \"$REMOTE\"
+[merge]
+tool = winmerge
+[mergetool]
+prompt = true
+[mergetool "winmerge"]
+path = C:\\Program Files (x86)\\WinMerge\\winmergeu.exe
+cmd = \"C:\\Program Files (x86)\\WinMerge\\winmergeu.exe\" -u -e -dl \"Local\" -dr \"Remote\" $LOCAL $REMOTE $MERGED

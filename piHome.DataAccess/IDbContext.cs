@@ -1,17 +1,16 @@
 ﻿using AspNet.Identity.MongoDB;
 using MongoDB.Driver;
-using piHome.DataAccess.Entities;
-using piHome.Models.Auth;
+using piHome.Models.Entities.Auth;
+using piHome.Models.Entities.Circuits;
 
 namespace piHome.DataAccess
 {
     public interface IDbContext
     {
-        IMongoCollection<CircuitStateEntity> CircuitsState { get; }
-        IMongoCollection<CircuitStateHistory> CircuitsStateHistory { get; }
-        IMongoCollection<Setting> Settings { get; }
+        IMongoCollection<CircuitStateEntity> Circuits { get; }
+        IMongoCollection<CircuitStateHistoryEntity> CircuitsStateHistory { get; }
         IMongoCollection<IdentityUser> IdentityUsers { get; }
-        IMongoCollection<Client> Clients { get; }
-        IMongoCollection<RefreshToken> RefreshTokens { get; }
+        IMongoCollection<ClientEntity> Clients { get; }
+        IMongoCollection<RefreshTokenEntity> RefreshTokens { get; }
     }
 }

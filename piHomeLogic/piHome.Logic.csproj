@@ -39,14 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\DateProvider.cs" />
+    <Compile Include="Shared\Implementation\DateProvider.cs" />
     <Compile Include="Implementation\OutputCircuitsManager.cs" />
     <Compile Include="Implementation\InputCircuitsManager.cs" />
-    <Compile Include="Implementation\PinMapper.cs" />
-    <Compile Include="Interfaces\IDateProvider.cs" />
+    <Compile Include="Shared\Implementation\PinMapper.cs" />
+    <Compile Include="Shared\Interfaces\IDateProvider.cs" />
     <Compile Include="Interfaces\IInputCircuitsManager.cs" />
     <Compile Include="Interfaces\IOutputCircuitsManager.cs" />
-    <Compile Include="Interfaces\IPinMapper.cs" />
+    <Compile Include="Shared\Interfaces\IPinMapper.cs" />
+    <Compile Include="Interfaces\IUserSettingsProcessor.cs" />
+    <Compile Include="Implementation\UserSettingsProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

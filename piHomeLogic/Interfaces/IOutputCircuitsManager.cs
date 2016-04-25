@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using piHome.Models.Circuit;
+using piHome.Models.Entities.Circuits;
+using piHome.Models.ValueObjects;
 
 namespace piHome.Logic.Interfaces
 {
@@ -7,6 +8,6 @@ namespace piHome.Logic.Interfaces
     {
         void SwitchCircuit(StateChange change);
 
-        List<CircuitState> GetOutputPinsInfo();
+        List<CircuitStateEntity> GetOutputPinsInfo();
     }
 }

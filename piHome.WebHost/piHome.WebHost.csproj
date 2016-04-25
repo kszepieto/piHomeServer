@@ -164,9 +164,13 @@
     <Compile Include="AuthProviders\SimpleRefreshTokenProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CircuitsController.cs" />
+    <Compile Include="Infrastructure\Helpers\Extentions.cs" />
+    <Compile Include="WebModels\UserSettings\CircuitsHandlingSetItem.cs" />
+    <Compile Include="WebModels\UserSettings\CircuitsHandlingSetVM.cs" />
+    <Compile Include="Controllers\UserSettingsController.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\GlobalExceptionHandler.cs" />
     <Compile Include="Infrastructure\Mapping\IMapperExtentions.cs" />
-    <Compile Include="Infrastructure\Mapping\MappingsProfile.cs" />
+    <Compile Include="Infrastructure\Mapping\MappingProfile.cs" />
     <Compile Include="Infrastructure\ValidateModelAttribute.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\ErrorModel.cs" />
     <Compile Include="Infrastructure\Exceptions\InvalidDataException.cs" />

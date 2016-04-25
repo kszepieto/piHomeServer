@@ -10,10 +10,10 @@ using piHome.Events;
 using piHome.GpioWrapper;
 using piHome.Logic.Implementation;
 using piHome.Logic.Interfaces;
-using piHome.Models.Auth;
+using piHome.Logic.Shared.Implementation;
+using piHome.Logic.Shared.Interfaces;
 using piHome.Utils;
 using piHome.WebHost.Infrastructure.Mapping;
-using piHome.WebHost.WebModels.Auth;
 
 namespace piHome.WebHost.Infrastructure.DI
 {
@@ -45,7 +45,7 @@ namespace piHome.WebHost.Infrastructure.DI
 #if DEBUG
             var gpioInterface = new GpioFakeInterface();
 #else
-                        var gpioInterface = new GpioInterface();
+            var gpioInterface = new GpioInterface();
 #endif
 
             kernel.Bind<IGpioOutputInterface>().ToConstant(gpioInterface);
@@ -61,13 +61,13 @@ namespace piHome.WebHost.Infrastructure.DI
         {
             kernel.Bind<IMongoDatabase>().ToConstant(GetDatabase());
             kernel.Bind<IDbContext>().To<DbContext>();
-            kernel.Bind<ICircuitsRepository>().To<CircuitsRepository>();
-            kernel.Bind<IAuthRepository>().To<AuthRepository>();
+            kernel.Bind<ICircuitsDalHelper>().To<CircuitsDalHelper>();
+            kernel.Bind<IAuthDalHelper>().To<AuthDalHelper>();
         }
 
         private void RegisterAutoMapper(IKernel kernel)
         {
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingsProfile>());
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
             config.AssertConfigurationIsValid();
 
             kernel.Bind<IMapper>().ToMethod((ctx) => config.CreateMapper());

@@ -2,7 +2,7 @@
 using System.Web.Http;
 using AutoMapper;
 using piHome.DataAccess.Interfaces;
-using piHome.Models.Auth;
+using piHome.Models.Entities.Auth;
 using piHome.WebHost.Infrastructure.Exceptions;
 using piHome.WebHost.WebModels.Auth;
 
@@ -11,7 +11,7 @@ namespace piHome.WebHost.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IAuthDalHelper _authDalHelper;
         private readonly IMapper _mapper;
 
         [AllowAnonymous]
@@ -19,7 +19,7 @@ namespace piHome.WebHost.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Register(UserRegistrationVM userRegistrationVM)
         {
-            var result = await _authRepository.RegisterUser(_mapper.Map<User>(userRegistrationVM));
+            var result = await _authDalHelper.RegisterUser(_mapper.Map<UserEntity>(userRegistrationVM));
             if (!result.Succeeded)
             {
                 throw new InvalidInputException("User registration error", result.Errors);
@@ -30,9 +30,9 @@ namespace piHome.WebHost.Controllers
 
         #region C'tor
 
-        public AccountController(IAuthRepository authRepository, IMapper mapper)
+        public AccountController(IAuthDalHelper authDalHelper, IMapper mapper)
         {
-            _authRepository = authRepository;
+            _authDalHelper = authDalHelper;
             _mapper = mapper;
         }
 

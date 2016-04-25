@@ -2,7 +2,8 @@
 using System.Web.Http;
 using AutoMapper;
 using piHome.Logic.Interfaces;
-using piHome.Models.Circuit;
+using piHome.Models.Entities.Circuits;
+using piHome.Models.ValueObjects;
 using piHome.Utils;
 using piHome.WebHost.Infrastructure.Mapping;
 using piHome.WebHost.WebModels.Circuits;
@@ -16,14 +17,14 @@ namespace piHome.WebHost.Controllers
         private readonly IMapper _mapper;
 
         [HttpGet]
-        [Route("CircuitsState")]
+        [Route("Circuits")]
         public List<CircuitStateVM> GetCircuitStates()
         {
             LogHelper.LogMessage("GetCircuitStates");
 
             var circuits = _outputCircuitsManager.GetOutputPinsInfo();
 
-            return _mapper.MapList<CircuitState, CircuitStateVM>(circuits);
+            return _mapper.MapList<CircuitStateEntity, CircuitStateVM>(circuits);
         }
 
         [HttpPost]

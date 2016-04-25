@@ -9,7 +9,7 @@ namespace piHome.WebHost.AuthProviders
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IAuthDalHelper _authDalHelper;
 
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
@@ -25,7 +25,7 @@ namespace piHome.WebHost.AuthProviders
                 return;
             }
 
-            var client = await _authRepository.FindClient(clientId);
+            var client = await _authDalHelper.FindClient(clientId);
             if (client == null)
             {
                 context.SetError("invalid_clientId", $"Client '{clientId}' is not registered in the system.");
@@ -55,7 +55,7 @@ namespace piHome.WebHost.AuthProviders
             context.OwinContext.Response.Headers.Remove("Access-Control-Allow-Origin");
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             
-            var user = await _authRepository.FindUser(context.UserName, context.Password);
+            var user = await _authDalHelper.FindUser(context.UserName, context.Password);
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
@@ -104,9 +104,9 @@ namespace piHome.WebHost.AuthProviders
             return Task.FromResult<object>(null);
         }
 
-        public SimpleAuthorizationServerProvider(IAuthRepository authRepository)
+        public SimpleAuthorizationServerProvider(IAuthDalHelper authDalHelper)
         {
-            _authRepository = authRepository;
+            _authDalHelper = authDalHelper;
         }
     }
 }

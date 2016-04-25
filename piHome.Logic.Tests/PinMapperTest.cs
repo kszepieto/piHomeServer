@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using piHome.GpioWrapper.Enums;
-using piHome.Logic.Implementation;
-using piHome.Models.Circuit.Enums;
+using piHome.Logic.Shared.Implementation;
+using piHome.Models.Enums;
 
 namespace piHome.Logic.Tests
 {

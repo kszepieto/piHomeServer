@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Conventions;
-using piHome.Models.Auth;
+using piHome.Models.Entities.Auth;
+using piHome.Models.Entities.Circuits;
+using piHome.Models.Enums;
 using piHome.Utils;
 
 namespace piHome.DataAccess
@@ -29,22 +31,30 @@ namespace piHome.DataAccess
 
         private static async Task EnsureIndexes(IDbContext dbContext)
         {
-            var clientIdField = new StringFieldDefinition<Client>(ExpressionsHelper.GetPropertyName<Client>(c => c.ClientId));
-            var clientIdIndex = new IndexKeysDefinitionBuilder<Client>().Ascending(clientIdField);
+            var clientIdField = new StringFieldDefinition<ClientEntity>(ExpressionsHelper.GetPropertyName<ClientEntity>(c => c.ClientId));
+            var clientIdIndex = new IndexKeysDefinitionBuilder<ClientEntity>().Ascending(clientIdField);
             await dbContext.Clients.Indexes.CreateOneAsync(clientIdIndex, new CreateIndexOptions() { Unique = true });
 
-            var refreshTokenIdField = new StringFieldDefinition<RefreshToken>(ExpressionsHelper.GetPropertyName<RefreshToken>(c => c.RefreshTokenId));
-            var refreshTokenIdIndex = new IndexKeysDefinitionBuilder<RefreshToken>().Ascending(refreshTokenIdField);
+            var refreshTokenIdField = new StringFieldDefinition<RefreshTokenEntity>(ExpressionsHelper.GetPropertyName<RefreshTokenEntity>(c => c.RefreshTokenId));
+            var refreshTokenIdIndex = new IndexKeysDefinitionBuilder<RefreshTokenEntity>().Ascending(refreshTokenIdField);
             await dbContext.RefreshTokens.Indexes.CreateOneAsync(refreshTokenIdIndex, new CreateIndexOptions() { Unique = true });
         }
 
         private static async Task Seed(IDbContext dbContext)
         {
+            await SeedClients(dbContext);
+            await SeedCircuits(dbContext);
+        }
+
+        private static async Task SeedClients(IDbContext dbContext)
+        {
+            LogHelper.LogMessage("Initializing clients");
+
             var clientId = "PiHomeMobileClient";
             var client = await dbContext.Clients.Find(f => f.ClientId == clientId).SingleOrDefaultAsync();
             if (client == null)
             {
-                var newClient = new Client
+                var newClient = new ClientEntity
                 {
                     Active = true,
                     AllowedOrigin = "*",
@@ -53,6 +63,27 @@ namespace piHome.DataAccess
                 };
 
                 await dbContext.Clients.InsertOneAsync(newClient);
+            }
+        }
+
+        private static async Task SeedCircuits(IDbContext dbContext)
+        {
+            LogHelper.LogMessage("Initializing circuits");
+
+            foreach (var circuitName in Enum.GetNames(typeof(Circuit)))
+            {
+                var circuit = (Circuit)Enum.Parse(typeof (Circuit), circuitName);
+                var circuitState = await dbContext.Circuits.Find(f => f.Circuit == circuit).SingleOrDefaultAsync();
+
+                if (circuitState == null)
+                {
+                    await dbContext.Circuits.InsertOneAsync(new CircuitStateEntity
+                    {
+                        Circuit = circuit,
+                        Name = "Circuit " + circuitName,
+                        State = false
+                    });
+                }
             }
         }
     }

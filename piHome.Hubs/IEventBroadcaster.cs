@@ -1,4 +1,4 @@
-﻿using piHome.Models.Circuit;
+﻿using piHome.Models.ValueObjects;
 
 namespace piHome.Events
 {

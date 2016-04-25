@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Owin.Hosting;
-using MongoDB.Driver;
 using Ninject;
 using piHome.DataAccess;
 using piHome.GpioWrapper;

@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson">
+    <Reference Include="MongoDB.Bson, Version=2.2.3.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.2.3\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,17 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
-    <Compile Include="Auth\Client.cs" />
-    <Compile Include="Auth\RefreshToken.cs" />
-    <Compile Include="Auth\User.cs" />
-    <Compile Include="Circuit\CircuitStateChange.cs" />
-    <Compile Include="Circuit\Enums\Circuit.cs" />
-    <Compile Include="Circuit\CircuitState.cs" />
-    <Compile Include="Circuit\Enums\SettingKey.cs" />
+    <Compile Include="Dtos\UserSettings\CircuitsHandlingSetDto.cs" />
+    <Compile Include="Entities\Auth\ClientEntity.cs" />
+    <Compile Include="Entities\Auth\RefreshToken.cs" />
+    <Compile Include="Entities\Auth\User.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Circuits\CircuitStateEntity.cs" />
+    <Compile Include="Entities\Circuits\CircuitStateHistoryEntity.cs" />
+    <Compile Include="Entities\UserSettings\CircuitsHandlingSetEntity.cs" />
+    <Compile Include="ValueObjects\StateChange.cs" />
+    <Compile Include="Enums\Circuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

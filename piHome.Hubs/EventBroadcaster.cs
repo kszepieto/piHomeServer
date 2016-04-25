@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using piHome.Events.Hubs;
-using piHome.Models.Circuit;
+using piHome.Models.ValueObjects;
 
 namespace piHome.Events
 {

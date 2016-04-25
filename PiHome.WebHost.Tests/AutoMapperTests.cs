@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using piHome.WebHost.Infrastructure.Mapping;
 
@@ -11,7 +10,7 @@ namespace PiHome.WebHost.Tests
         [TestMethod]
         public void AssertConfiguration()
         {
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingsProfile>());
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
             config.AssertConfigurationIsValid();
         }
     }
