@@ -63,12 +63,14 @@
   <ItemGroup>
     <Compile Include="DbContext.cs" />
     <Compile Include="IDbContext.cs" />
-    <Compile Include="Implementation\IAuthDalHelper.cs" />
+    <Compile Include="Implementation\AuthDalHelper.cs" />
     <Compile Include="Implementation\BaseDalHelper.cs" />
     <Compile Include="Implementation\CircuitsDalHelper.cs" />
     <Compile Include="Interfaces\IAuthDalHelper.cs" />
     <Compile Include="DbInitializer.cs" />
     <Compile Include="Interfaces\ICircuitsDalHelper.cs" />
+    <Compile Include="Interfaces\IUserSettingsDalHelper.cs" />
+    <Compile Include="Implementation\UserSettingsDalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

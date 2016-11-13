@@ -43,13 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\UserSettings\CircuitsHandlingSetDto.cs" />
+    <Compile Include="Domain\CircuitsHandlingSet.cs" />
+    <Compile Include="Dtos\UserSettings\CircuitsHandlingSetListItemDto.cs" />
     <Compile Include="Entities\Auth\ClientEntity.cs" />
     <Compile Include="Entities\Auth\RefreshToken.cs" />
     <Compile Include="Entities\Auth\User.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Circuits\CircuitStateEntity.cs" />
     <Compile Include="Entities\Circuits\CircuitStateHistoryEntity.cs" />
+    <Compile Include="Dtos\UserSettings\CircuitsHandlingSetDto.cs" />
     <Compile Include="Entities\UserSettings\CircuitsHandlingSetEntity.cs" />
     <Compile Include="ValueObjects\StateChange.cs" />
     <Compile Include="Enums\Circuit.cs" />

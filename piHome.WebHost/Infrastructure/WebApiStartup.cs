@@ -35,10 +35,10 @@ namespace piHome.WebHost.Infrastructure
             config.Filters.Add(new AuthorizeAttribute());
             config.Filters.Add(new ValidateModelAttribute());
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "piHost/{controller}"
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "piHost/{controller}"
+            //);
 
             if (Type.GetType("Mono.Runtime") != null)
             {

@@ -6,11 +6,11 @@ namespace piHome.Logic.Interfaces
 {
     public interface ICircuitsHandlingSetsProcessor
     {
-        string CreateCircuitsHandlingSet(CircuitsHandlingSetEntity circuitsHandlingSetEntity);
+        string CreateCircuitsHandlingSet(CircuitsHandlingSetDto circuitsHandlingSetEntity);
 
-        void UpdateCircuitsHandlingSet(string id, CircuitsHandlingSetEntity circuitsHandlingSetEntity);
+        void UpdateCircuitsHandlingSet(CircuitsHandlingSetDto circuitsHandlingSetEntity);
 
-        List<CircuitsHandlingSetDto> GetCircuitsHandlingSets(string userId, bool privateOnly);
+        List<CircuitsHandlingSetListItemDto> GetCircuitsHandlingSets(string userId, bool privateOnly);
 
         void DeleteCircuitsHandlingSet(string id);
 

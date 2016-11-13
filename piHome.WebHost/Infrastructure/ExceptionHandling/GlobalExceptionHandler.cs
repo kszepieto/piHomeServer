@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Http.ExceptionHandling;
-using piHome.WebHost.Infrastructure.Exceptions;
+using piHome.Utils.Exceptions;
 
 namespace piHome.WebHost.Infrastructure.ExceptionHandling
 {
     public class GlobalExceptionHandler : ExceptionHandler
     {
         private const string GeneralErrorMessage =
-            "Uuppss - R2D2 has circuit overload !!! Maybe try again later, then try to off and on :)";
+            "Uuppss - R2D2 has circuit overload !!! Try to off and on :), if this doesn't help You are DOOMED";
 
         public override void Handle(ExceptionHandlerContext context)
         {
@@ -17,6 +18,19 @@ namespace piHome.WebHost.Infrastructure.ExceptionHandling
             if (invalidDataException != null)
             {
                 context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.BadRequest, invalidDataException.Message, invalidDataException.ErrorDetails);
+            }
+
+            var businesRuleViolationException = exception as BusinesRuleViolationException;
+            if (businesRuleViolationException != null)
+            {
+                context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.BadRequest, "Businnes rules violation", businesRuleViolationException.Errors);
+            }
+
+            var entityNotFoundException = exception as EntityNotFoundException;
+            if(entityNotFoundException != null)
+            {
+                var message = $"Entity id: {entityNotFoundException.ID}, type: {entityNotFoundException.ObjecType.Name} cannot be found";
+                context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.NotFound, message);
             }
 
             context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.InternalServerError, GeneralErrorMessage);

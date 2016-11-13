@@ -3,7 +3,7 @@ using System.Web.Http;
 using AutoMapper;
 using piHome.DataAccess.Interfaces;
 using piHome.Models.Entities.Auth;
-using piHome.WebHost.Infrastructure.Exceptions;
+using piHome.Utils.Exceptions;
 using piHome.WebHost.WebModels.Auth;
 
 namespace piHome.WebHost.Controllers

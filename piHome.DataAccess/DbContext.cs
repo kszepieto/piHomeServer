@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using piHome.Models.Entities.Auth;
 using piHome.Models.Entities.Circuits;
+using piHome.Models.Entities.UserSettings;
 
 namespace piHome.DataAccess
 {
@@ -13,6 +14,7 @@ namespace piHome.DataAccess
         private const string IDENTITY_USERS = "identity_users";
         private const string CLIENTS = "clients";
         private const string REFRESH_TOKENS = "refresh_tokens";
+        private const string CIRCUITS_HANDLING_SETS = "circuits_handling_sets";
         
         public IMongoCollection<CircuitStateEntity> Circuits => _database.GetCollection<CircuitStateEntity>(CIRCUITS_STATE);
 
@@ -23,6 +25,8 @@ namespace piHome.DataAccess
         public IMongoCollection<ClientEntity> Clients => _database.GetCollection<ClientEntity>(CLIENTS);
 
         public IMongoCollection<RefreshTokenEntity> RefreshTokens => _database.GetCollection<RefreshTokenEntity>(REFRESH_TOKENS);
+
+        public IMongoCollection<CircuitsHandlingSetEntity> CircuitsHandlingSets => _database.GetCollection<CircuitsHandlingSetEntity>(CIRCUITS_HANDLING_SETS);
 
         public DbContext(IMongoDatabase database)
         {

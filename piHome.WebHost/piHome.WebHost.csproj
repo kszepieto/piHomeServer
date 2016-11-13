@@ -173,7 +173,6 @@
     <Compile Include="Infrastructure\Mapping\MappingProfile.cs" />
     <Compile Include="Infrastructure\ValidateModelAttribute.cs" />
     <Compile Include="Infrastructure\ExceptionHandling\ErrorModel.cs" />
-    <Compile Include="Infrastructure\Exceptions\InvalidDataException.cs" />
     <Compile Include="Infrastructure\MonoPatchingDelegatingHandler.cs" />
     <Compile Include="Infrastructure\DI\NinjectAPIDependencyResolver.cs" />
     <Compile Include="Infrastructure\DI\NinjectConfiguration.cs" />

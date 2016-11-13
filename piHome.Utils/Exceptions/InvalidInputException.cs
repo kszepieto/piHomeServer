@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace piHome.WebHost.Infrastructure.Exceptions
+namespace piHome.Utils.Exceptions
 {
     public class InvalidInputException : Exception
     {

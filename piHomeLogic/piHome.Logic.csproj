@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\CircuitsHandlingSetEntityFactory.cs" />
     <Compile Include="Shared\Implementation\DateProvider.cs" />
     <Compile Include="Implementation\OutputCircuitsManager.cs" />
     <Compile Include="Implementation\InputCircuitsManager.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Interfaces\IUserSettingsProcessor.cs" />
     <Compile Include="Implementation\UserSettingsProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\Interfaces\IUserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\piHome.DataAccess\piHome.DataAccess.csproj">

@@ -16,14 +16,14 @@ namespace piHome.WebHost.Controllers
         private readonly ICircuitsHandlingSetsProcessor _circuitsHandlingSetsProcessor;
         private readonly IMapper _mapper;
 
-        [Route("CircuitsHandlingSet/")]
+        [Route("CircuitsHandlingSet")]
         [HttpGet]
         public List<CircuitsHandlingSetListVM> GetCircuitsHandlingSets(bool privateOnly)
         {
             var userId = User.GetLoggedUserId();
             var definedSets = _circuitsHandlingSetsProcessor.GetCircuitsHandlingSets(userId, privateOnly);
 
-            return _mapper.MapList<CircuitsHandlingSetDto, CircuitsHandlingSetListVM>(definedSets);
+            return _mapper.MapList<CircuitsHandlingSetListItemDto, CircuitsHandlingSetListVM>(definedSets);
         }
 
         [Route("CircuitsHandlingSet/:id")]
@@ -32,7 +32,8 @@ namespace piHome.WebHost.Controllers
         {
             var circuitsHandlingSet = _mapper.Map<CircuitsHandlingSetEntity>(circuitsHandlingSetVM);
             
-            return _circuitsHandlingSetsProcessor.CreateCircuitsHandlingSet(circuitsHandlingSet);
+            //return _circuitsHandlingSetsProcessor.CreateCircuitsHandlingSet(circuitsHandlingSet);
+            return null;
         }
 
         [Route("CircuitsHandlingSet/:id")]
@@ -41,7 +42,7 @@ namespace piHome.WebHost.Controllers
         {
             var circuitsHandlingSet = _mapper.Map<CircuitsHandlingSetEntity>(circuitsHandlingSetVM);
 
-            _circuitsHandlingSetsProcessor.UpdateCircuitsHandlingSet(id, circuitsHandlingSet);
+            //_circuitsHandlingSetsProcessor.UpdateCircuitsHandlingSet(id, circuitsHandlingSet);
         }
 
         [Route("CircuitsHandlingSet/:id")]
